@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Run performance test
       # - docker run -i loadimpact/k6 run - <performance/100VUs/perf_SearchEndpoint.js -e BASE_URL=https://pro.missiongraph.io -e AUTH_KEY=lotcp4aswl7qztahdpbt5l7zy -e AUTH_USER=MGtestuser
-      - docker run -v `pwd`/k6Test:/tmp -i loadimpact/k6 run /tmp/performance/100VUs/perf_ReportingEndpoint.js -e BASE_URL=https://pro.missiongraph.io -e AUTH_KEY=lotcp4aswl7qztahdpbt5l7zy -e AUTH_USER=MGtestuser
+      - docker run -v $(pwd)/k6Test:/tmp -i loadimpact/k6 run /tmp/performance/100VUs/perf_ReportingEndpoint.js -e BASE_URL=https://pro.missiongraph.io -e AUTH_KEY=lotcp4aswl7qztahdpbt5l7zy -e AUTH_USER=MGtestuser
   post_build:
     commands:
         - echo Performance test complete
