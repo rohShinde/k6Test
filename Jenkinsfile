@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "jenkins-nodejs12x"
+        label "nodejs12x-gvcn8"
     }
 
     triggers {
@@ -33,14 +33,8 @@ pipeline {
         stage('Performance Testing') {
             steps {
                 echo 'Installing k6...'
-                //sh 'sudo chmod +x setup_k6.sh'
-                //sh 'sudo ./setup_k6.sh'
-                sh 'sudo apt-get update'
-                sh 'sudo apt-get install dirmngr --install-recommends'
-                sh 'sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69'
-                sh 'sudo tee /etc/apt/sources.list.d/k6.list'
-                sh 'sudo apt-get update'
-                sh 'sudo apt-get install k6'
+                sh 'sudo chmod +x setup_k6.sh'
+                sh 'sudo ./setup_k6.sh'
                 echo 'Running K6 performance tests...'
                 sh "k6 run ${TEST_DIRECTORY}/${TEST_Name} -e BASE_URL=${MG_BASE_URL} -e AUTH_KEY=${AUTH_KEY} -e AUTH_USER=${MG_USER}"
                 echo 'Completed Running K6 performance tests!'
