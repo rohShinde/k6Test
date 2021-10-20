@@ -9,7 +9,7 @@ pipeline {
 
     parameters {
         string(name: 'GIT_REPO', defaultValue: 'https://github.com/rohShinde/k6Test.git', description: 'Git repository that contains end-to-end tests')
-        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Branch or PR name that contains the tests')
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch or PR name that contains the tests')
         string(name: 'MG_USER', defaultValue: 'MGtestuser', description: 'mg user for api authentication')
         string(name: 'AUTH_KEY', defaultValue: 'lotcp4aswl7qztahdpbt5l7zy', description: 'auth key for api authentication')
         string(name: 'MG_BASE_URL', defaultValue: 'https://pro.missiongraph.io', description: 'Cypress baseUrl that the tests run against')
@@ -24,9 +24,9 @@ pipeline {
                     script {
                             sh 'git config --global credential.helper store'
                             sh 'jx step git credentials'
-                            sh 'git clone ${GIT_REPO} cloned-repo'
+                            sh "git clone ${GIT_REPO} cloned-repo"
                             // Clone Repo, checkout branch and build artifacts
-                            sh 'cd cloned-repo && git checkout ${BRANCH_NAME}'
+                            sh "cd cloned-repo && git checkout ${BRANCH_NAME}"
                     }
                 }
             }
