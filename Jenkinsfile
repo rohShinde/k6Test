@@ -10,17 +10,14 @@ pipeline {
         string(name: 'TEST_DIRECTORY', defaultValue: 'performance', description: 'Specific directory where tests are located in the k6Test')
         string(name: 'TEST_Name', defaultValue: '100VUs/perfSearchEndPoint.js', description: 'Specific directory where tests are located in the k6Test with test name')
     }
-
-    environment {
-        AUTH_KEY=
-    }
+    
     stages {
         stage('Performance Testing') {
             steps {
                 echo 'Running K6 performance tests...'
                 sh 'sudo chmod +x setup_k6.sh'
                 sh 'sudo ./setup_k6.sh'
-                sh 'k6 run ${TEST_DIRECTORY}/${TEST_Name}'
+                sh 'k6 run ${TEST_DIRECTORY}/${TEST_Name} -e BASE_URL=${MG_BASE_URL} -e AUTH_KEY=${AUTH_KEY} -e AUTH_USER=${MG_USER}'
                 echo 'Completed Running K6 performance tests!'
             }
         }
