@@ -1,8 +1,8 @@
 import { Httpx } from 'https://jslib.k6.io/httpx/0.0.6/index.js';
 import { randomIntBetween } from 'https://jslib.k6.io/k6-utils/1.1.0/index.js';
 
-import { getBearerToken, checkStatus } from '/mounted/support/utils.js';
-import { searchAllEntities, searchSingleEntity } from '/mounted/support/federatedSearch.js';
+import { getBearerToken, checkStatus } from '/mounted/k6Test/support/utils.js';
+import { searchAllEntities, searchSingleEntity } from '/mounted/k6Test/support/federatedSearch.js';
 
 const session = new Httpx({
     baseURL: __ENV.BASE_URL
