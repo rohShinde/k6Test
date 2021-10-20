@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label "jenkins-e2e-v1"
-    }
+    agent any
 
     triggers {
         cron('H * * * *')
@@ -18,14 +16,13 @@ pipeline {
     }
 
     stages {
-        stage('Clone, checkout and build') {
+        stage('Clone, checkout') {
             steps {
                 container('nodejs') {
                     script {
                             sh 'git config --global credential.helper store'
                             sh 'jx step git credentials'
                             sh "git clone ${GIT_REPO} cloned-repo"
-                            // Clone Repo, checkout branch and build artifacts
                             sh "cd cloned-repo && git checkout ${BRANCH_NAME}"
                     }
                 }
