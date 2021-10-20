@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "nodejs12x-gvcn8"
+        label "jenkins-e2e-v1"
     }
 
     triggers {
