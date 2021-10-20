@@ -18,6 +18,19 @@ pipeline {
     }
 
     stages {
+        stage('Clone, checkout and build') {
+            steps {
+                container('nodejs') {
+                    script {
+                            sh 'git config --global credential.helper store'
+                            sh 'jx step git credentials'
+                            sh 'git clone ${GIT_REPO} cloned-repo'
+                            // Clone Repo, checkout branch and build artifacts
+                            sh 'cd cloned-repo && git checkout ${BRANCH_NAME}'
+                    }
+                }
+            }
+        }
         stage('Performance Testing') {
             steps {
                 echo 'Installing k6...'
