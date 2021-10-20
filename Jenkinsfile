@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label "jenkins-nodejs12x"
+    }
 
     triggers {
         cron('H * * * *')
