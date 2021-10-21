@@ -13,10 +13,9 @@ phases:
       - docker.image("${build.imageName}").inside("-v $pwd:/app") {
                     sh "ls -l /app/"
                     sh "chmod +rwx ./"
-                    sh "chmod +x uitest_helpers/driver/driver_executables/**/*"
-                    sh "${testCmd}"
-                }
-      - docker run -v $(pwd)/k6Test:/mounted -i loadimpact/k6:latest run /mounted/performance/100VUs/perf_SearchEndpoint.js -e BASE_URL=https://pro.missiongraph.io -e AUTH_KEY=lotcp4aswl7qztahdpbt5l7zy -e AUTH_USER=MGtestuser
+                    sh "chmod +x support/*"
+                    sh "docker run -i loadimpact/k6:latest run /app/performance/100VUs/perf_SearchEndpoint.js -e BASE_URL=https://pro.missiongraph.io -e AUTH_KEY=lotcp4aswl7qztahdpbt5l7zy -e AUTH_USER=MGtestuser" }
+      #- docker run -v $(pwd)/k6Test:/mounted -i loadimpact/k6:latest run /mounted/performance/100VUs/perf_SearchEndpoint.js -e BASE_URL=https://pro.missiongraph.io -e AUTH_KEY=lotcp4aswl7qztahdpbt5l7zy -e AUTH_USER=MGtestuser
   post_build:
     commands:
         - echo Performance test complete
